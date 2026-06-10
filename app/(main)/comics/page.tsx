@@ -20,6 +20,7 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import { Badge } from "@/components/ui/badge";
+import { formatComicClass } from "@/lib/formatters";
 
 // Define the correct order: S (most powerful) first, then A, B, C
 const CLASS_ORDER = ['S', 'A', 'B', 'C'] as const;
@@ -153,7 +154,7 @@ export default function ComicsPage() {
               <SelectItem value="all">Todas as Classes</SelectItem>
               {CLASS_ORDER.map((classType) => (
                 <SelectItem key={classType} value={classType}>
-                  Classe {classType}
+                  {formatComicClass(classType)}
                 </SelectItem>
               ))}
             </SelectContent>
@@ -208,7 +209,7 @@ export default function ComicsPage() {
                   <SelectItem value="all">Todas as Classes</SelectItem>
                   {CLASS_ORDER.map((classType) => (
                     <SelectItem key={classType} value={classType}>
-                      Classe {classType}
+                      {formatComicClass(classType)}
                     </SelectItem>
                   ))}
                 </SelectContent>
@@ -234,7 +235,7 @@ export default function ComicsPage() {
           <div key={classKey} className="space-y-4">
             <div className="flex items-center gap-4">
               <h2 className="text-xl md:text-2xl font-semibold whitespace-nowrap">
-                Classe {classKey}
+                {classKey === 'Sem Classe' ? classKey : formatComicClass(classKey)}
               </h2>
               <Badge 
                 variant="outline" 

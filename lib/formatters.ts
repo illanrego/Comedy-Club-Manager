@@ -47,3 +47,18 @@ export function formatNumber(value: number, decimals: number = 0): string {
     .replace('.', ',')
     .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
 }
+
+export function formatComicClass(comicClass: string | null | undefined): string {
+  switch (comicClass) {
+    case 'A':
+      return 'Headliner'
+    case 'B':
+      return 'Elenco'
+    case 'C':
+      return 'Open'
+    case 'S':
+      return 'Classe S'
+    default:
+      return 'Sem Classe'
+  }
+}

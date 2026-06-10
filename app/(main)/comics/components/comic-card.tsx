@@ -6,6 +6,7 @@ import { useState } from "react";
 import { AddComicDialog } from "./add-comic-dialog";
 import Link from "next/link";
 import { deleteComic } from "../actions/delete-comic.action";
+import { formatComicClass } from "@/lib/formatters";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -69,7 +70,7 @@ export function ComicCard({ comic, avgTicketsSold, avgBarRevenue, onComicUpdated
             <div className="flex items-center gap-3 mb-3">
                             {comic.class && (
                                 <div className="inline-block px-2 py-1 rounded-md bg-primary/10 text-primary text-sm font-medium">
-                                  Classe {comic.class}
+                                  {formatComicClass(comic.class)}
                                 </div>
                               )}
               {comic.city && (

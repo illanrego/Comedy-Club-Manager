@@ -51,6 +51,7 @@ import {
   Clock
 } from "lucide-react";
 import { SelectComic } from "@/db/schema";
+import { formatComicClass } from "@/lib/formatters";
 
 interface ScheduledShow {
   id: string;
@@ -329,10 +330,10 @@ export default function SchedulePage() {
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="all">Todas as Classes</SelectItem>
-                      <SelectItem value="S">Classe S</SelectItem>
-                      <SelectItem value="A">Classe A</SelectItem>
-                      <SelectItem value="B">Classe B</SelectItem>
-                      <SelectItem value="C">Classe C</SelectItem>
+                      <SelectItem value="S">{formatComicClass('S')}</SelectItem>
+                      <SelectItem value="A">{formatComicClass('A')}</SelectItem>
+                      <SelectItem value="B">{formatComicClass('B')}</SelectItem>
+                      <SelectItem value="C">{formatComicClass('C')}</SelectItem>
                     </SelectContent>
                   </Select>
 
@@ -357,7 +358,7 @@ export default function SchedulePage() {
                     <div key={classKey} className="space-y-2">
                       <div className="flex items-center gap-2">
                         <Badge variant="outline" className={getClassColor(classKey)}>
-                          Classe {classKey}
+                          {classKey === 'Unclassified' ? 'Sem Classe' : formatComicClass(classKey)}
                         </Badge>
                         <span className="text-sm text-muted-foreground">
                           ({classComics.length})
@@ -537,7 +538,7 @@ export default function SchedulePage() {
                                               variant="outline" 
                                               className={`h-4 px-1 text-[10px] ${getClassColor(comic.class)}`}
                                             >
-                                              {comic.class}
+                                              {formatComicClass(comic.class)}
                                             </Badge>
                                             <Button
                                               variant="ghost"

@@ -19,6 +19,7 @@ import { SelectComic } from "@/db/schema";
 import { addComic } from "../actions/add-comic.action";
 import { useState } from "react";
 import { updateComic } from "../actions/update-comic.action";
+import { formatComicClass } from "@/lib/formatters";
 
 // Define the correct order: S (most powerful) first, then A, B, C
 const CLASS_ORDER = ['S', 'A', 'B', 'C'] as const;
@@ -100,7 +101,7 @@ export function AddComicDialog({ children, onComicAdded, comic, mode = 'add' }: 
               <SelectContent>
                 {CLASS_ORDER.map((classType) => (
                   <SelectItem key={classType} value={classType}>
-                    Classe {classType}
+                    {formatComicClass(classType)}
                   </SelectItem>
                 ))}
               </SelectContent>

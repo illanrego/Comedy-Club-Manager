@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { formatDate } from "@/lib/utils";
 import { SelectShow } from "@/db/schema";
+import { formatComicClass } from "@/lib/formatters";
 
 interface ComicPageProps {
   params: {
@@ -83,7 +84,7 @@ export default async function ComicPage({ params }: ComicPageProps) {
               <div className="flex flex-wrap gap-3 mt-3">
                 {comic.class && (
                   <Badge variant="secondary" className="text-sm">
-                    Classe {comic.class}
+                    {formatComicClass(comic.class)}
                   </Badge>
                 )}
                 {comic.city && (

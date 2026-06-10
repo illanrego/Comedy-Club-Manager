@@ -4,7 +4,7 @@ import { eq } from "drizzle-orm";
 
 export async function updateStockService(
     id: number, 
-    item: Omit<InsertStockItem, 'id' | 'currentQuantity' | 'createdAt' | 'updatedAt'>
+    item: Omit<InsertStockItem, 'id' | 'createdAt' | 'updatedAt'>
 ) {
     return await db.update(stockItemsTable)
         .set({
@@ -13,4 +13,3 @@ export async function updateStockService(
         })
         .where(eq(stockItemsTable.id, id));
 }
-

@@ -133,20 +133,20 @@ export function AddStockDialog({ children, onStockAdded, item, mode = 'add' }: A
                             </Select>
                         </div>
 
-                        {mode === 'add' && (
-                            <div className="space-y-2">
-                                <Label htmlFor="currentQuantity">Quantidade Inicial</Label>
-                                <Input
-                                    id="currentQuantity"
-                                    name="currentQuantity"
-                                    type="number"
-                                    step="0.01"
-                                    min="0"
-                                    defaultValue="0"
-                                    placeholder="0"
-                                />
-                            </div>
-                        )}
+                        <div className="space-y-2">
+                            <Label htmlFor="currentQuantity">
+                                {mode === 'edit' ? 'Quantidade Atual' : 'Quantidade Inicial'}
+                            </Label>
+                            <Input
+                                id="currentQuantity"
+                                name="currentQuantity"
+                                type="number"
+                                step="0.01"
+                                min="0"
+                                defaultValue={item?.currentQuantity || '0'}
+                                placeholder="0"
+                            />
+                        </div>
 
                         <div className="space-y-2">
                             <Label htmlFor="minQuantity">Quantidade Mínima</Label>
@@ -229,4 +229,3 @@ export function AddStockDialog({ children, onStockAdded, item, mode = 'add' }: A
         </Dialog>
     );
 }
-

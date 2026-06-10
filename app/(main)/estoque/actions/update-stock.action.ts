@@ -15,6 +15,7 @@ export async function updateStock(formData: FormData) {
     const name = formData.get('name') as string;
     const category = formData.get('category') as typeof stockCategoryEnum.enumValues[number];
     const unit = formData.get('unit') as typeof stockUnitEnum.enumValues[number];
+    const currentQuantity = formData.get('currentQuantity') as string;
     const minQuantity = formData.get('minQuantity') as string;
     const costPrice = formData.get('costPrice') as string;
     const salePrice = formData.get('salePrice') as string;
@@ -31,6 +32,7 @@ export async function updateStock(formData: FormData) {
             name,
             category,
             unit: unit || 'unidade',
+            currentQuantity: currentQuantity || '0',
             minQuantity: minQuantity || '0',
             costPrice,
             salePrice,
@@ -44,4 +46,3 @@ export async function updateStock(formData: FormData) {
         throw new Error('Failed to update stock item');
     }
 }
-

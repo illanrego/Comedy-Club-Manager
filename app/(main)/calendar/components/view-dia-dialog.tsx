@@ -35,6 +35,7 @@ interface ViewShowDialogProps {
     showQuality?: string | null;
     isFiftyFifty?: boolean | null;
     freeTickets?: number | null;
+    source?: 'manual' | 'google_calendar' | null;
   };
   comics?: (SelectComic & { comicShow?: { comicId: string; showId: number; position?: string | null } })[];
   onClose?: () => void;
@@ -120,6 +121,11 @@ export function ViewShowDialog({
             <div className="flex items-center gap-2 mt-1 text-muted-foreground">
               <Calendar className="h-4 w-4" />
               <span>{formatDate(selectedDate?.toISOString() || '')}</span>
+              {show.source === 'google_calendar' && (
+                <Badge variant="secondary" className="ml-2">
+                  Importado do Google
+                </Badge>
+              )}
             </div>
             {show.startTime && (
               <div className="flex items-center gap-2 mt-1 text-muted-foreground">

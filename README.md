@@ -161,6 +161,11 @@ DATABASE_URL=postgresql://usuario:senha@localhost:5432/ccapp
 
 # Auth (opcional / optional)
 AUTH_SECRET=seu-secret-aqui
+
+# Google Calendar import
+GOOGLE_CLIENT_ID=seu-google-client-id
+GOOGLE_CLIENT_SECRET=seu-google-client-secret
+GOOGLE_CALENDAR_ENCRYPTION_KEY=uma-chave-longa-e-secreta
 ```
 
 4. **Configure o banco de dados / Set up the database**

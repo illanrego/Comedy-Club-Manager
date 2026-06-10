@@ -29,6 +29,7 @@ export type SelectSession = typeof sessionTable.$inferSelect;
 
 // Enum for comic class
 export const comicClassEnum = pgEnum('comic_class', ['A', 'B', 'C', 'S']);
+export const showSourceEnum = pgEnum('show_source', ['manual', 'google_calendar']);
 
 // Shows table (renamed from diasTable)
 export const showsTable = pgTable('shows', {
@@ -42,10 +43,30 @@ export const showsTable = pgTable('shows', {
     showQuality: text('show_quality'),
     isFiftyFifty: boolean('is_fifty_fifty').default(false), // New field to indicate if revenue is split 50/50
     freeTickets: integer('free_tickets').default(0), // New field to track free tickets
+    source: showSourceEnum('source').notNull().default('manual'),
+    googleEventId: text('google_event_id').unique(),
+    importedAt: timestamp('imported_at', { withTimezone: true, mode: 'date' }),
+    lastGoogleSyncAt: timestamp('last_google_sync_at', { withTimezone: true, mode: 'date' }),
 });
 
 export type InsertShow = typeof showsTable.$inferInsert;
 export type SelectShow = typeof showsTable.$inferSelect;
+
+export const googleCalendarConnectionsTable = pgTable('google_calendar_connections', {
+    id: serial('id').primaryKey(),
+    provider: text('provider').notNull().unique().default('google_calendar'),
+    googleCalendarId: text('google_calendar_id'),
+    googleCalendarName: text('google_calendar_name'),
+    encryptedAccessToken: text('encrypted_access_token').notNull(),
+    encryptedRefreshToken: text('encrypted_refresh_token'),
+    tokenExpiresAt: timestamp('token_expires_at', { withTimezone: true, mode: 'date' }),
+    connectedByUserId: text('connected_by_user_id').references(() => usersTable.id, { onDelete: 'set null' }),
+    createdAt: timestamp('created_at', { withTimezone: true, mode: 'date' }).defaultNow().notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true, mode: 'date' }).defaultNow().notNull(),
+});
+
+export type InsertGoogleCalendarConnection = typeof googleCalendarConnectionsTable.$inferInsert;
+export type SelectGoogleCalendarConnection = typeof googleCalendarConnectionsTable.$inferSelect;
 
 // Comics table
 export const comicsTable = pgTable('comics', {

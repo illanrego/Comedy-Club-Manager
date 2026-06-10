@@ -7,6 +7,7 @@ import { formatDate } from "@/lib/utils";
 import { CalendarDialog } from "./components/calendar-dialog";
 import { ViewShowDialog } from "./components/view-dia-dialog";
 import { CalendarPreviewDialog } from "./components/calendar-preview-dialog";
+import { GoogleCalendarImportDialog } from "./components/google-calendar-import-dialog";
 import { getShows } from "./actions/get-dias.action";
 import { deleteShow } from "./actions/delete-dia.action";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -26,6 +27,7 @@ interface ShowWithDateObject {
   showQuality?: string | null;
   isFiftyFifty?: boolean | null;
   freeTickets?: number | null;
+  source?: 'manual' | 'google_calendar' | null;
 }
 
 type MetricType = 'tickets' | 'ticketRevenue' | 'barRevenue' | 'totalRevenue' | 'profit' | 'comics';
@@ -362,6 +364,11 @@ export default function CalendarPage() {
     }
   };
 
+  const refreshShows = async () => {
+    const updatedShows = await getShows()
+    setShows(updatedShows)
+  }
+
   // Calculate total sum for the selected metric in current month
   const totalMetricSum = currentMonthShowsPast.reduce((total, { show }) => {
     // Create a proper ShowWithDateObject from the database show
@@ -406,6 +413,7 @@ export default function CalendarPage() {
           <h1 className="text-6xl font-bold">Calendário</h1>
         </div>
         <div className="flex flex-col items-center gap-4">
+          <GoogleCalendarImportDialog onImported={refreshShows} />
           <span className="text-3xl font-medium">{getMetricDisplayName()}</span>
           <span className="text-lg text-muted-foreground">
             {currentMonth.toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' })}

@@ -17,6 +17,7 @@ export async function getShows() {
     showQuality: showsTable.showQuality,
     isFiftyFifty: showsTable.isFiftyFifty,
     freeTickets: showsTable.freeTickets,
+    source: showsTable.source,
   }).from(showsTable);
   
   // Then for each show, get the associated comics

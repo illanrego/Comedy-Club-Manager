@@ -1,4 +1,7 @@
 # CCAPP - Comedy Club Manager 🎤
+
+![Comedy Club Manager](docs/screenshot.png)
+
 ![Next.js](https://img.shields.io/badge/Next.js-14-black)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Database-blue)
@@ -157,7 +160,7 @@ Crie um arquivo `.env.local` na raiz do projeto com as seguintes variáveis:
 
 ```env
 # Database
-DATABASE_URL=postgresql://usuario:senha@localhost:5432/ccapp
+DATABASE_URL=postgresql://usuario:***@localhost:5432/ccapp
 
 # Auth (opcional / optional)
 AUTH_SECRET=seu-secret-aqui
